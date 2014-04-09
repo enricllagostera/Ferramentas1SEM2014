@@ -3,12 +3,13 @@
 body {
   padding:50px;
   font:16px/1.5 "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color:#444;
+  color:#eee;
   font-weight:400;
+  background-color:#222;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color:#222;
+  color:#ccc;
   margin:0 0 20px;
 }
 
@@ -29,12 +30,12 @@ h2 {
 }
 
 h3, h4, h5, h6 {
-  color:#494949;
+  color:#aaa;
 }
 
 a {
-  color:#39c;
-  font-weight:400;
+  color:#c93;
+  font-weight:700;
   text-decoration:none;
 }
 
