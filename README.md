@@ -1,7 +1,7 @@
-## Repositório: Ferramentas de Desenvolvimento Rápido de Jogos
+# Repositório
 
-**1o SEM - 2014**
+Prof. (Enric Llagostera)[http://enric.llagostera.com.br].
 
-Prof. Enric Llagostera
+Exemplos, materiais variados e outras coisas da disciplina Ferramentas de Desenvolvimento Rápido de Jogos, no 1o semestre de 2014.
 
 
