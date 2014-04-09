@@ -1,4 +1,4 @@
-# Repositório
+# Repositório didático
 
 Responsável: Prof. [Enric Llagostera](http://enric.llagostera.com.br).
 
