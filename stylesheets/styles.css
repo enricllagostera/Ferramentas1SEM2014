@@ -9,7 +9,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color:#FF0066;
+  color:#C3FF68;
   margin:0 0 20px;
 }
 
@@ -22,6 +22,7 @@ h1, h2, h3 {
 }
 
 h1 {
+  color:#fff;
   font-size:28px;
 }
 
