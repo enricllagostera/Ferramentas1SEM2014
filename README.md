@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/enricllagostera/ferramentas1sem2014.png?label=ready&title=Ready)](https://waffle.io/enricllagostera/ferramentas1sem2014)
 # Repositório didático
 
 Responsável: Prof. [Enric Llagostera](http://enric.llagostera.com.br).
