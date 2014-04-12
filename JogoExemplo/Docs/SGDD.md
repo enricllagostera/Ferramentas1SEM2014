@@ -1,4 +1,4 @@
-# SGDD - Guilherme Tell e as maçãs mutantes
+## SGDD - Guilherme Tell e as maçãs mutantes
 
 O jogo começa com um menu inicial com instruções, créditos e os personagens animados, mas parados. Toca uma música de fundo e é visível uma instrução para apertar um botão para jogar.
 
