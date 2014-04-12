@@ -6,3 +6,6 @@ O cenário da partida é uma caverna, com rampas e plataformas, arcos por onde e
 
 Quando a partida termina, é mostrada uma tela de game over com o score alcançado pelo jogador e um botão para recomeçar o jogo.
 
+### Lista de elementos e afazeres
+
+Eu preparei a lista de afazeres a partir deste SGDD usando o [Trello](http://trello.com), um software de gerenciamento de projetos. [Aqui está o link para a lista](https://trello.com/b/fO62K6bn/ferramentas1sem2014).
