@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// tem que estar na mesma ordem que nos build settings do editor
 public enum Tela {
 	TITULO,
 	INGAME,
@@ -52,6 +53,7 @@ public class JogoManager : MonoBehaviour {
 
 	public void Update()
 	{
+		telaAtual = (Tela)Application.loadedLevel;
 		// Avanca as telas - FIXME corrigir o input
 		if(Input.GetButton("Jump")){
 			TrocaTela();
