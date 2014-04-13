@@ -18,6 +18,8 @@ public class Jogador : MonoBehaviour {
 	public Acao acaoAtual;
 	public Olhar olhar;
 
+	public Transform visual;
+
 	Animator animator;
 
 	// Use this for initialization
@@ -33,10 +35,11 @@ public class Jogador : MonoBehaviour {
 	void Update () {
 		if(acaoAtual != Acao.Atirando){
 			ControlaMovimento();
+			arco.right = (olhar == Olhar.Direita)? transform.right : -transform.right;
 		}
 		ControlaTiros();
-		transform.localScale = new Vector3((int)olhar * escala.x, escala.y, escala.z);
-		float mod = (olhar == Olhar.Esquerda)? -escala.x : escala.x;
+		visual.localScale = new Vector3((int)olhar * escala.x, escala.y, escala.z);
+		//float mod = (olhar == Olhar.Esquerda)? -escala.x : escala.x;
 	}
 
 	#region Movimento
@@ -153,14 +156,14 @@ public class Jogador : MonoBehaviour {
 		
 		// quando solta o botao de tiro
 		if(Input.GetButtonUp("Fire1") && acaoAtual == Acao.Atirando){
-			acaoAtual = Acao.Parado;
+
 			//motor.canControl = true;
 			projetil.rigidbody2D.isKinematic = false;
 			projetil.collider2D.isTrigger = false;
 			projetil.rigidbody2D.AddForce(projetil.right*forcaFlecha);
 			mira.gameObject.SetActive(false);
 			animator.SetTrigger("DisparouFlecha");
-			arco.right = transform.right; // FIXME meio tosco
+			StartCoroutine(DesarmarArco());
 		}
 	}
 
@@ -168,6 +171,13 @@ public class Jogador : MonoBehaviour {
 	{
 		//Animator anim = GetComponent<Animator>();
 		//anim.SetFloat("RotacaoArco", projetil.rotation.eulerAngles.z);
+	}
+
+	public IEnumerator DesarmarArco()
+	{
+		yield return new WaitForSeconds(0.15f);
+		acaoAtual = Acao.Parado;
+		arco.right = (olhar == Olhar.Direita)? transform.right : -transform.right; // FIXME meio tosco
 	}
 	#endregion
 }
