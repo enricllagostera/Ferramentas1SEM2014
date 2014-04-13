@@ -33,39 +33,49 @@ public class Jogador : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		inputX = Input.GetAxis("Horizontal");
+
 		if(acaoAtual != Acao.Atirando){
-			ControlaMovimento();
 			arco.right = (olhar == Olhar.Direita)? transform.right : -transform.right;
+			ControlaMovimento();
 		}
 		ControlaTiros();
 		visual.localScale = new Vector3((int)olhar * escala.x, escala.y, escala.z);
+		animator.SetFloat("VelocidadeX", Mathf.Abs(transform.rigidbody2D.velocity.x));
 		//float mod = (olhar == Olhar.Esquerda)? -escala.x : escala.x;
 	}
 
 	#region Movimento
-	
-	public float velocidade;
+
+	public float velocidadeX;
+	private float inputX;
 	private Vector3 escala;
 	
 	void ControlaMovimento(){
-		if(Input.GetAxis("Horizontal") == 0){
+
+		Debug.Log(inputX);
+		if(inputX == 0){
 			acaoAtual = Acao.Parado;
-			//animacao.state.SetAnimation(0, "Idle", true);
-			//animacao.timeScale = 0.5f;
 		}
 		else {
 			acaoAtual = Acao.Andando;
-			//animacao.state.SetAnimation(0, "Run_3", true);
-			//animacao.timeScale = 1.5f;
-			//animacao.zSpacing = 0f;
-			
-			if(Input.GetAxis("Horizontal") > 0){
+			if(inputX > 0){
 				olhar = Olhar.Direita;
 			}
 			else {
 				olhar = Olhar.Esquerda;
 			}
 		}
+	}
+
+	void FixedUpdate(){
+		float novaVelocidade = inputX * velocidadeX;
+		if(acaoAtual == Acao.Atirando){
+			novaVelocidade = 0;
+		}
+		transform.rigidbody2D.velocity = new Vector2(novaVelocidade, 
+		                                             transform.rigidbody2D.velocity.y);
+
 	}
 	
 	#endregion
@@ -114,12 +124,14 @@ public class Jogador : MonoBehaviour {
 				Mathf.Atan2(mira.position.y-transform.position.y, 
 				            mira.position.x-transform.position.x) * 180 / Mathf.PI;
 
+			/*
 			if(anguloAnterior <= 90f && anguloAnterior >= -90f){
 				olhar = Olhar.Direita;
 			}
 			if(anguloAnterior > 90f || anguloAnterior < -90f){
 				olhar = Olhar.Esquerda;
 			}
+			*/
 
 			
 			if(Input.GetAxis("Vertical") > 0){
@@ -165,12 +177,6 @@ public class Jogador : MonoBehaviour {
 			animator.SetTrigger("DisparouFlecha");
 			StartCoroutine(DesarmarArco());
 		}
-	}
-
-	public void PreparaArco()
-	{
-		//Animator anim = GetComponent<Animator>();
-		//anim.SetFloat("RotacaoArco", projetil.rotation.eulerAngles.z);
 	}
 
 	public IEnumerator DesarmarArco()
