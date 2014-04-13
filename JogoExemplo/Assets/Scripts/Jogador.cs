@@ -72,7 +72,7 @@ public class Jogador : MonoBehaviour {
 
 		estaNoChao = Physics2D.Linecast(transform.position, sensorChao.position, 
 		                                1<<LayerMask.NameToLayer("Chao"));
-
+		animator.SetBool("EstaNoChao", estaNoChao);
 
 	}
 
