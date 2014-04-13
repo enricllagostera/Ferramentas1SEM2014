@@ -50,6 +50,9 @@ public class Jogador : MonoBehaviour {
 	public float velocidadeX;
 	private float inputX;
 	private Vector3 escala;
+	public Transform sensorChao;
+	public bool estaNoChao;
+	public float forcaPulo;
 	
 	void ControlaMovimento(){
 
@@ -66,6 +69,11 @@ public class Jogador : MonoBehaviour {
 				olhar = Olhar.Esquerda;
 			}
 		}
+
+		estaNoChao = Physics2D.Linecast(transform.position, sensorChao.position, 
+		                                1<<LayerMask.NameToLayer("Chao"));
+
+
 	}
 
 	void FixedUpdate(){
@@ -75,6 +83,10 @@ public class Jogador : MonoBehaviour {
 		}
 		transform.rigidbody2D.velocity = new Vector2(novaVelocidade, 
 		                                             transform.rigidbody2D.velocity.y);
+		if(estaNoChao && Input.GetButton("Jump")){
+			animator.SetTrigger("Pulando");
+			transform.rigidbody2D.AddForce(new Vector2(0, forcaPulo * rigidbody2D.mass));
+		}
 
 	}
 	
