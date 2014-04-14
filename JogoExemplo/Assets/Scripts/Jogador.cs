@@ -74,7 +74,7 @@ public class Jogador : MonoBehaviour {
 		estaNoChao = Physics2D.Linecast(transform.position, sensorChao.position, 
 		                                1<<LayerMask.NameToLayer("Chao"));
 		animator.SetBool("EstaNoChao", estaNoChao);
-		if(estaNoChao && Input.GetButton("Jump")){
+		if(estaNoChao && Input.GetButtonDown("Jump")){
 			pular = true;
 		}
 		if(!estaNoChao) pular = false;
