@@ -27,7 +27,6 @@ public class Maca : MonoBehaviour {
 		estado = Estado.Vivo;
 		olhar = Olhar.Esquerda;
 		escala = transform.localScale;
-		colliderSensor = sensorChao.GetComponent<BoxCollider2D>();
 		timerPulo = 0;
 		animator = GetComponent<Animator>();
 	}
