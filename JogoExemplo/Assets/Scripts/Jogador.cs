@@ -129,6 +129,7 @@ public class Jogador : MonoBehaviour {
 				maoFlecha.position,
 				Quaternion.identity
 				) as Transform;
+			projetil.GetChild(0).tag = "Untagged"; 
 			projetil.rigidbody2D.isKinematic = true;
 			projetil.collider2D.isTrigger = true;
 		}
@@ -140,41 +141,6 @@ public class Jogador : MonoBehaviour {
 			float anguloAnterior = 
 				Mathf.Atan2(mira.position.y-transform.position.y, 
 				            mira.position.x-transform.position.x) * 180 / Mathf.PI;
-
-			/*
-			if(anguloAnterior <= 90f && anguloAnterior >= -90f){
-				olhar = Olhar.Direita;
-			}
-			if(anguloAnterior > 90f || anguloAnterior < -90f){
-				olhar = Olhar.Esquerda;
-			}
-			*/
-
-			/*
-			if(Input.GetAxis("Vertical") > 0){
-				novoAnguloMira += (olhar == Olhar.Direita)? 
-					velocidadeMira : -velocidadeMira;
-			}
-			else if(Input.GetAxis("Vertical") < 0){
-				novoAnguloMira += (olhar == Olhar.Esquerda)? 
-					velocidadeMira : -velocidadeMira;
-			}
-			
-			float anguloFinal = anguloAnterior + novoAnguloMira;
-			
-			if(olhar == Olhar.Direita){
-				anguloFinal = Mathf.Clamp(
-					anguloFinal, -90f + velocidadeMira*2,
-					90f - velocidadeMira*2);
-			}
-			if(olhar == Olhar.Esquerda){
-				if(anguloFinal > -90f - velocidadeMira*2 && anguloFinal < 0)
-					anguloFinal = -90f - velocidadeMira*2;
-				else if(anguloFinal <= 90f + velocidadeMira*2 && anguloFinal > 0)
-					anguloFinal = 90f + velocidadeMira*2;
-			}
-			anguloFinal -= anguloAnterior;
-			*/
 
 			projetil.position = maoFlecha.position;
 
@@ -194,11 +160,10 @@ public class Jogador : MonoBehaviour {
 		
 		// quando solta o botao de tiro
 		if(Input.GetButtonUp("Fire1") && acaoAtual == Acao.Atirando){
-
-			//motor.canControl = true;
+			projetil.GetChild(0).tag = "Flechas";
 			projetil.rigidbody2D.isKinematic = false;
 			projetil.collider2D.isTrigger = false;
-			projetil.rigidbody2D.AddForce(projetil.right*forcaFlecha);
+			projetil.rigidbody2D.AddForce(projetil.right*forcaFlecha*100);
 			mira.gameObject.SetActive(false);
 			animator.SetTrigger("DisparouFlecha");
 			StartCoroutine(DesarmarArco());

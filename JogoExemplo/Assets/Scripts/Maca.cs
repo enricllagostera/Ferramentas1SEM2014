@@ -20,6 +20,7 @@ public class Maca : MonoBehaviour {
 	private BoxCollider2D colliderSensor;
 	public float cooldownPulo;
 	public float timerPulo;
+	Animator animator;
 
 	// Use this for initialization
 	void Start () {
@@ -28,6 +29,7 @@ public class Maca : MonoBehaviour {
 		escala = transform.localScale;
 		colliderSensor = sensorChao.GetComponent<BoxCollider2D>();
 		timerPulo = 0;
+		animator = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -43,7 +45,7 @@ public class Maca : MonoBehaviour {
 			rigidbody2D.fixedAngle = true;
 			// fisica do pulo
 			Vector3 auxPos = new Vector3(transform.position.x, 
-			                             transform.position.y-0.1f, 
+			                             transform.position.y-0.05f, 
 			                             transform.position.z);
 			estaNoChao = Physics2D.OverlapCircle(auxPos, (collider2D as CircleCollider2D).radius, 
 			                                   1<<LayerMask.NameToLayer("Chao"));
@@ -63,6 +65,7 @@ public class Maca : MonoBehaviour {
 	void FixedUpdate()
 	{
 		if(estado == Estado.Vivo && vaiPular && estaNoChao){
+			animator.SetTrigger("Pulando");
 			timerPulo = cooldownPulo;
 			vaiPular = false;
 			rigidbody2D.AddForce(new Vector2(velocidadeX * rigidbody2D.mass * (int)olhar, 
@@ -87,13 +90,18 @@ public class Maca : MonoBehaviour {
 	{
 		if(col.gameObject.CompareTag("Flechas") && estado == Estado.Vivo){
 			estado = Estado.Morto;
+			animator.SetTrigger("Morrendo");
 			col.gameObject.rigidbody2D.fixedAngle = true;
 			col.gameObject.transform.rigidbody2D.isKinematic = true;
 			col.gameObject.transform.collider2D.isTrigger = true;
 			col.gameObject.transform.parent.rigidbody2D.fixedAngle = true;
 			col.gameObject.transform.parent.collider2D.isTrigger = true;
 			col.gameObject.transform.parent.parent = transform;
-			transform.gameObject.layer = LayerMask.NameToLayer("Mortos");
+			//transform.gameObject.layer = LayerMask.NameToLayer("Mortos");
+		}
+		else if(col.gameObject.CompareTag("Flechas") && estado == Estado.Morto){
+			Destroy(col.gameObject);
+			Destroy (gameObject);
 		}
 
 	}
