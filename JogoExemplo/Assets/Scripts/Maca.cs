@@ -42,12 +42,6 @@ public class Maca : MonoBehaviour {
 		// TODO adicionar animacoes
 		if(estado == Estado.Vivo){
 			rigidbody2D.fixedAngle = true;
-			// fisica do pulo
-			Vector3 auxPos = new Vector3(transform.position.x, 
-			                             transform.position.y-0.05f, 
-			                             transform.position.z);
-			estaNoChao = Physics2D.OverlapCircle(auxPos, (collider2D as CircleCollider2D).radius, 
-			                                   1<<LayerMask.NameToLayer("Chao"));
 			SegueJogador();
 			//animator.SetBool("EstaNoChao", estaNoChao);
 			if(estaNoChao && querPular){
@@ -101,6 +95,10 @@ public class Maca : MonoBehaviour {
 		else if(col.gameObject.CompareTag("Flechas") && estado == Estado.Morto){
 			Destroy(col.gameObject);
 			Destroy (gameObject);
+		}
+
+		if(col.gameObject.CompareTag("Chao") && col.transform.position.y < transform.position.y){
+			estaNoChao = true;
 		}
 
 	}
