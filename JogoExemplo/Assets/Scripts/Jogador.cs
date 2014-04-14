@@ -150,7 +150,7 @@ public class Jogador : MonoBehaviour {
 			}
 			*/
 
-			
+			/*
 			if(Input.GetAxis("Vertical") > 0){
 				novoAnguloMira += (olhar == Olhar.Direita)? 
 					velocidadeMira : -velocidadeMira;
@@ -173,12 +173,21 @@ public class Jogador : MonoBehaviour {
 				else if(anguloFinal <= 90f + velocidadeMira*2 && anguloFinal > 0)
 					anguloFinal = 90f + velocidadeMira*2;
 			}
-			projetil.position = maoFlecha.position;
 			anguloFinal -= anguloAnterior;
-			mira.RotateAround(arco.position, arco.forward, anguloFinal);
+			*/
+
+			projetil.position = maoFlecha.position;
+
+			Vector3 mousePos = Input.mousePosition;
+			mousePos.z = Vector3.Distance(Camera.main.transform.position, transform.position); //The distance from the camera to the player object
+			Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
+			lookPos = lookPos - transform.position;
+			float anguloMira = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
+
+			mira.RotateAround(arco.position, arco.forward, anguloMira-anguloAnterior);
 			Vector3 targetDir = mira.position - arco.position;
-			float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
-			mira.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+			float angulo = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
+			mira.rotation = Quaternion.AngleAxis(angulo, Vector3.forward);
 			projetil.right = mira.right;
 			arco.right = projetil.right;
 		}
