@@ -179,6 +179,7 @@ public class Jogador : MonoBehaviour {
 
 	public void OnDestroy()
 	{
+		JogoManager.i.gameOver = true;
 		Debug.Log("Jogo acabou");
 	}
 }

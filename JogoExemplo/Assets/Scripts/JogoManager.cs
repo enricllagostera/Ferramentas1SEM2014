@@ -14,6 +14,8 @@ public class JogoManager : MonoBehaviour {
 	public Tela telaAtual;
 	public bool gameOver;
 
+	public int score;
+
 	public Maca macaPrefab;
 	public Flecha flechaPrefab;
 
@@ -56,6 +58,7 @@ public class JogoManager : MonoBehaviour {
 
 	public void Start()
 	{
+
 		ObjectPool.CreatePool<Flecha>(flechaPrefab);
 		ObjectPool.CreatePool<Maca>(macaPrefab);
 	}
@@ -73,6 +76,7 @@ public class JogoManager : MonoBehaviour {
 	{
 		switch (telaAtual) {
 		case Tela.TITULO : 
+			score = 0;
 			telaAtual = Tela.INGAME;
 			Application.LoadLevel("Ingame");
 			break;

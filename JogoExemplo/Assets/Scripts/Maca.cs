@@ -83,6 +83,7 @@ public class Maca : MonoBehaviour {
 	{
 		if(col.gameObject.CompareTag("Flechas") && estado == Estado.Vivo){
 			estado = Estado.Morto;
+			JogoManager.i.score++;
 			animator.SetTrigger("Morrendo");
 			col.gameObject.rigidbody2D.fixedAngle = true;
 			col.gameObject.transform.rigidbody2D.isKinematic = true;
@@ -104,6 +105,7 @@ public class Maca : MonoBehaviour {
 
 	void OnDestroy()
 	{
+		if(estado == Estado.Vivo) JogoManager.i.score++;
 		ObjectPool.Recycle(this);
 	}
 }
