@@ -29,6 +29,7 @@ public class Jogador : MonoBehaviour {
 		offsetMira = mira.position - transform.position;
 		escala = transform.localScale;
 		animator = GetComponent<Animator>();
+		JogoManager.i.gameOver = false;
 	}
 	
 	// Update is called once per frame
@@ -179,7 +180,7 @@ public class Jogador : MonoBehaviour {
 
 	public void OnDestroy()
 	{
-		JogoManager.i.gameOver = true;
-		Debug.Log("Jogo acabou");
+		JogoManager.i.gameOver = (JogoManager.i.telaAtual == Tela.INGAME);
+		Debug.Log("J destruido : " + JogoManager.i.telaAtual + " : " + JogoManager.i.gameOver);
 	}
 }

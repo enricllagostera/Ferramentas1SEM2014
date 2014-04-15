@@ -29,7 +29,6 @@ public class JogoManager : MonoBehaviour {
 			if(_instance == null)
 			{
 				_instance = GameObject.FindObjectOfType<JogoManager>();
-				
 				//Tell unity not to destroy this object when loading a new scene!
 				DontDestroyOnLoad(_instance.gameObject);
 			}
@@ -53,48 +52,42 @@ public class JogoManager : MonoBehaviour {
 			if(this != _instance)
 				Destroy(this.gameObject);
 		}
-	}
-	#endregion
-
-	public void Start()
-	{
-
 		ObjectPool.CreatePool<Flecha>(flechaPrefab);
 		ObjectPool.CreatePool<Maca>(macaPrefab);
 	}
+	#endregion
 
 	public void Update()
 	{
-		telaAtual = (Tela)Application.loadedLevel;
-		// Avanca as telas - FIXME corrigir o input
-		if(Input.GetKey(KeyCode.Escape)){
-			TrocaTela();
-		}
+		//telaAtual = (Tela)Application.loadedLevel;
 	}
 
 	public void TrocaTela()
 	{
 		switch (telaAtual) {
-		case Tela.TITULO : 
-			score = 0;
-			telaAtual = Tela.INGAME;
+		case Tela.TITULO :
 			Application.LoadLevel("Ingame");
+			telaAtual = Tela.INGAME;
+			score = 0;
+
 			break;
 		case Tela.INGAME : 
 			if(gameOver){
-				telaAtual = Tela.GAMEOVER;
-				ObjectPool.Clear();
 				Application.LoadLevel("GameOver");
+				ObjectPool.Clear();
+				telaAtual = Tela.GAMEOVER;
 				gameOver = false;
 			}
 			else {
-				telaAtual = Tela.TITULO;
 				Application.LoadLevel("Titulo");
+				telaAtual = Tela.TITULO;
+				gameOver = false;
 			}
 			break;
 		case Tela.GAMEOVER : 
-			telaAtual = Tela.TITULO;
 			Application.LoadLevel("Titulo");
+			telaAtual = Tela.TITULO;
+			gameOver = false;
 			break;
 		default:
 			break;
