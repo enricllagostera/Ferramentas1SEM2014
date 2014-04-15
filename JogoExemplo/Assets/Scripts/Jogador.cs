@@ -56,8 +56,7 @@ public class Jogador : MonoBehaviour {
 	private bool pular = false;
 	
 	void ControlaMovimento(){
-
-		Debug.Log(inputX);
+		
 		if(inputX == 0){
 			acaoAtual = Acao.Parado;
 		}
@@ -177,4 +176,9 @@ public class Jogador : MonoBehaviour {
 		arco.right = (olhar == Olhar.Direita)? transform.right : -transform.right; // FIXME meio tosco
 	}
 	#endregion
+
+	public void OnDestroy()
+	{
+		Debug.Log("Jogo acabou");
+	}
 }
