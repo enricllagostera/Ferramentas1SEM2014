@@ -123,11 +123,11 @@ public class Jogador : MonoBehaviour {
 			else {
 				mira.position = transform.position + new Vector3(-offsetMira.x, offsetMira.y);
 			}
-			projetil = GameObject.Instantiate(
+			projetil = ObjectPool.Spawn(
 				projetilPrefab, 
 				maoFlecha.position,
 				Quaternion.identity
-				) as Transform;
+				);
 			projetil.GetChild(0).tag = "Untagged"; 
 			projetil.rigidbody2D.isKinematic = true;
 			projetil.collider2D.isTrigger = true;

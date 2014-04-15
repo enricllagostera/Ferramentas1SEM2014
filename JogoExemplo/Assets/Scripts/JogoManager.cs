@@ -14,6 +14,9 @@ public class JogoManager : MonoBehaviour {
 	public Tela telaAtual;
 	public bool gameOver;
 
+	public Maca macaPrefab;
+	public Flecha flechaPrefab;
+
 	#region Singleton
 	private static JogoManager _instance;
 
@@ -51,11 +54,17 @@ public class JogoManager : MonoBehaviour {
 	}
 	#endregion
 
+	public void Start()
+	{
+		ObjectPool.CreatePool<Flecha>(flechaPrefab);
+		ObjectPool.CreatePool<Maca>(macaPrefab);
+	}
+
 	public void Update()
 	{
 		telaAtual = (Tela)Application.loadedLevel;
 		// Avanca as telas - FIXME corrigir o input
-		if(Input.GetButton("Jump")){
+		if(Input.GetKey(KeyCode.Escape)){
 			TrocaTela();
 		}
 	}
@@ -70,6 +79,7 @@ public class JogoManager : MonoBehaviour {
 		case Tela.INGAME : 
 			if(gameOver){
 				telaAtual = Tela.GAMEOVER;
+				ObjectPool.Clear();
 				Application.LoadLevel("GameOver");
 				gameOver = false;
 			}
@@ -85,5 +95,10 @@ public class JogoManager : MonoBehaviour {
 		default:
 			break;
 		}
+	}
+
+	void OnDestroy()
+	{
+
 	}
 }

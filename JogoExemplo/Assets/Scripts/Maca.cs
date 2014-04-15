@@ -100,7 +100,11 @@ public class Maca : MonoBehaviour {
 		if(col.gameObject.CompareTag("Chao") && col.transform.position.y < transform.position.y){
 			estaNoChao = true;
 		}
+	}
 
+	void OnDestroy()
+	{
+		ObjectPool.Recycle(this);
 	}
 }
 
