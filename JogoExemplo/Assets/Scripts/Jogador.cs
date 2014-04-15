@@ -160,7 +160,6 @@ public class Jogador : MonoBehaviour {
 		
 		// quando solta o botao de tiro
 		if(Input.GetButtonUp("Fire1") && acaoAtual == Acao.Atirando){
-			projetil.GetChild(0).tag = "Flechas";
 			projetil.rigidbody2D.isKinematic = false;
 			projetil.collider2D.isTrigger = false;
 			projetil.rigidbody2D.AddForce(projetil.right*forcaFlecha*100);
@@ -175,8 +174,18 @@ public class Jogador : MonoBehaviour {
 		yield return new WaitForSeconds(0.15f);
 		acaoAtual = Acao.Parado;
 		arco.right = (olhar == Olhar.Direita)? transform.right : -transform.right; // FIXME meio tosco
+		projetil.tag = "Flechas";
 	}
 	#endregion
+
+	void OnCollisionEnter2D(Collision2D coll)
+	{
+		if(coll.gameObject.transform.CompareTag("Inimigo") && 
+		   coll.gameObject.transform.GetComponent<Maca>().estado == Estado.Vivo){
+			Destroy (gameObject);
+		}
+
+	}
 
 	public void OnDestroy()
 	{

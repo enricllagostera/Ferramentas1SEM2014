@@ -3,13 +3,20 @@ using System.Collections;
 
 public class Flecha : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
+	public void CravaFlecha(Transform pai)
+	{
+		Debug.Log ("crava flecha");
+		rigidbody2D.velocity = Vector2.zero;
+		Destroy (rigidbody2D);
+		Destroy (collider2D);
+		transform.parent = pai;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void OnCollisionEnter2D(Collision2D coll)
+	{
+		CravaFlecha(coll.gameObject.transform);
+		if(coll.gameObject.transform.CompareTag("Inimigo")){
+			coll.gameObject.GetComponent<Maca>().MataMaca();
+		}
 	}
 }

@@ -64,6 +64,9 @@ public class JogoManager : MonoBehaviour {
 
 	public void TrocaTela()
 	{
+		ObjectPool.Clear();
+		ObjectPool.CreatePool<Flecha>(flechaPrefab);
+		ObjectPool.CreatePool<Maca>(macaPrefab);
 		switch (telaAtual) {
 		case Tela.TITULO :
 			Application.LoadLevel("Ingame");

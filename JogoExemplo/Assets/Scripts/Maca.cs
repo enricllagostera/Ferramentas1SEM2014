@@ -81,25 +81,18 @@ public class Maca : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		if(col.gameObject.CompareTag("Flechas") && estado == Estado.Vivo){
-			estado = Estado.Morto;
-			JogoManager.i.score++;
-			animator.SetTrigger("Morrendo");
-			col.gameObject.rigidbody2D.fixedAngle = true;
-			col.gameObject.transform.rigidbody2D.isKinematic = true;
-			col.gameObject.transform.collider2D.isTrigger = true;
-			col.gameObject.transform.parent.rigidbody2D.fixedAngle = true;
-			col.gameObject.transform.parent.collider2D.isTrigger = true;
-			col.gameObject.transform.parent.parent = transform;
-			//transform.gameObject.layer = LayerMask.NameToLayer("Mortos");
-		}
-		else if(col.gameObject.CompareTag("Flechas") && estado == Estado.Morto){
-			Destroy(col.gameObject);
-			Destroy (gameObject);
-		}
 
 		if(col.gameObject.CompareTag("Chao") && col.transform.position.y < transform.position.y){
 			estaNoChao = true;
+		}
+	}
+
+	public void MataMaca()
+	{
+		if(estado == Estado.Vivo){
+			estado = Estado.Morto;
+			JogoManager.i.score++;
+			animator.SetTrigger("Morrendo");
 		}
 	}
 
