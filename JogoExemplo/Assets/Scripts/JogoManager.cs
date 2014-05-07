@@ -67,6 +67,7 @@ public class JogoManager : MonoBehaviour {
 		ObjectPool.Clear();
 		ObjectPool.CreatePool<Flecha>(flechaPrefab);
 		ObjectPool.CreatePool<Maca>(macaPrefab);
+
 		switch (telaAtual) {
 		case Tela.TITULO :
 			Application.LoadLevel("Ingame");
@@ -95,10 +96,5 @@ public class JogoManager : MonoBehaviour {
 		default:
 			break;
 		}
-	}
-
-	void OnDestroy()
-	{
-
 	}
 }
