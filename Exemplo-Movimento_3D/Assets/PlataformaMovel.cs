@@ -18,9 +18,9 @@ public class PlataformaMovel : MonoBehaviour {
 		// interpola a posicao do objeto
 		transform.position = Vector3.Lerp(transform.position, ancoras[proximaAncora].position, 
 		                                  suavizacao * Time.deltaTime);
+
 		// se chegou bem perto da proxima ancora
 		if(Vector3.Distance(transform.position, ancoras[proximaAncora].position) < 0.2f) {
-			Debug.Log(true);
 			proximaAncora++; // muda para proxima posicao no vetor de ancoras
 			if(proximaAncora >= ancoras.Length) proximaAncora = 0; // se passou da maior posicao, volta a primeira
 		}

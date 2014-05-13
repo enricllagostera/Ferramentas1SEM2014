@@ -4,7 +4,9 @@ using System.Collections;
 // enumerador para variavel de controle
 public enum Telas {
 	Primeira,
-	Segunda
+	Segunda,
+	Terceira,
+	Quarta
 }
 
 /// <summary>
@@ -16,6 +18,7 @@ public class GerenciadorJogo : MonoBehaviour {
 
 	public static GerenciadorJogo instancia;
 	public Telas telaAtual;
+	public int score;
 
 	// na primeira inicializacao do componente
 	void Awake() {
@@ -47,3 +50,8 @@ public class GerenciadorJogo : MonoBehaviour {
 		}
 	}
 }
+
+
+
+
+
